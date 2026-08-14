@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://du6n8e2y3obj6"]
+
+[ext_resource type="Script" uid="uid://dic3pfho0sqop" path="res://scripts/GameManager.cs" id="1_hwd4i"]
+
+[node name="GameManager" type="Node" unique_id=874557430]
+script = ExtResource("1_hwd4i")
+
+[node name="Timer" type="Timer" parent="." unique_id=1114405443]
+wait_time = 5.0
+autostart = true

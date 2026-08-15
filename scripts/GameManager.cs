@@ -3,7 +3,7 @@ using System;
 
 public partial class GameManager : Node {
     private int _state = 0;
-    private double _secondsPerBeat = 1;
+    private double _secondsPerBeat;
     private AudioStreamPlayer _audioStream;
 
     /// <summary>
@@ -15,9 +15,9 @@ public partial class GameManager : Node {
     public int totalStates = 2;
 
     /// <summary>
-    /// Fires whenever the timer finishes a cycle
+    /// Triggers events that rely on the beat of the song toggling the state
     /// </summary>
-    /// <param name="state">The current new state after a timer cycle is finished. Goes from 0 to totalStates - 1</param>
+    /// <param name="state">The current new state after a measure is finished. Goes from 0 to totalStates - 1</param>
     [Signal]
     public delegate void BeatToggleEventHandler(int state);
 
@@ -26,6 +26,7 @@ public partial class GameManager : Node {
 
         _audioStream = GetNode<AudioStreamPlayer>("AudioStreamPlayer");
 
+        // Calculated by 60 seconds divided by beats per minute (song is at 90 bpm)
         _secondsPerBeat = 60d / 90d;
         _state = 0;
     }
@@ -45,6 +46,10 @@ public partial class GameManager : Node {
         }
     }
 
+    /// <summary>
+    /// Gets the current beat of the song
+    /// </summary>
+    /// <returns>Integer value with first beat at 0</returns>
     private int getCurrentBeat() {
         double currentSongTime = _audioStream.GetPlaybackPosition() + AudioServer.GetTimeSinceLastMix();
         currentSongTime -= AudioServer.GetOutputLatency();

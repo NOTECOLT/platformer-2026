@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://du6n8e2y3obj6"]
 
 [ext_resource type="Script" uid="uid://dic3pfho0sqop" path="res://scripts/GameManager.cs" id="1_hwd4i"]
-[ext_resource type="AudioStream" uid="uid://dc2sulsapbl7f" path="res://assets/audio/music/tic-toc-shuffle.ogg" id="2_glms7"]
+[ext_resource type="AudioStream" uid="uid://dc2sulsapbl7f" path="res://assets/audio/music/tic_toc_shuffle.ogg" id="2_glms7"]
 
 [node name="GameManager" type="Node" unique_id=874557430]
 script = ExtResource("1_hwd4i")

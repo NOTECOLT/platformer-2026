@@ -6,8 +6,9 @@
 [ext_resource type="Script" uid="uid://cnjt8jy2rm6rg" path="res://scripts/Player.cs" id="2_0wfyh"]
 [ext_resource type="Texture2D" uid="uid://hl0opfbyu05h" path="res://assets/sprites/blocks/Tileset_4.png" id="2_o6xl0"]
 [ext_resource type="Texture2D" uid="uid://d1gmj3r2xeir0" path="res://assets/sprites/tileset16x16.png" id="3_sugp2"]
-[ext_resource type="PackedScene" uid="uid://dmtsshn7xo2q4" path="res://scenes/platform.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://dmtsshn7xo2q4" path="res://scenes/world/platform.tscn" id="4_jyhfs"]
 [ext_resource type="Script" uid="uid://bdnn5353obmg6" path="res://scripts/TimedToggle.cs" id="5_tipki"]
+[ext_resource type="PackedScene" uid="uid://b31p1gnrsy0o4" path="res://scenes/world/killzone.tscn" id="9_85g3d"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jyhfs"]
 texture = ExtResource("3_sugp2")
@@ -429,7 +430,12 @@ texture = ExtResource("2_o6xl0")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_85g3d")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ejbd"]
+size = Vector2(1769, 95)
+
 [node name="Main" type="Node2D" unique_id=1720358603]
+metadata/_edit_vertical_guides_ = [352.0]
+metadata/_edit_horizontal_guides_ = [161.0, 102.0]
 
 [node name="GameManager" parent="." unique_id=874557430 instance=ExtResource("1_o6xl0")]
 unique_name_in_owner = true
@@ -458,6 +464,7 @@ script = ExtResource("2_0wfyh")
 position = Vector2(-1, -4)
 offset = Vector2(0, -40)
 zoom = Vector2(3, 3)
+limit_bottom = 100
 position_smoothing_enabled = true
 
 [node name="AnimatableBody2D" parent="." unique_id=2088697655 instance=ExtResource("4_jyhfs")]
@@ -465,3 +472,12 @@ position = Vector2(854, -12)
 
 [node name="AnimatableBody2D2" parent="." unique_id=1292183502 instance=ExtResource("4_jyhfs")]
 position = Vector2(912, -12)
+
+[node name="Killzone" parent="." unique_id=179547633 instance=ExtResource("9_85g3d")]
+position = Vector2(285, 141)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone" unique_id=1416484373]
+position = Vector2(195.5, 7.5)
+shape = SubResource("RectangleShape2D_0ejbd")
+
+[connection signal="body_entered" from="Killzone" to="Killzone" method="OnBodyEntered"]

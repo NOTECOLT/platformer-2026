@@ -34,7 +34,6 @@ public partial class GameManager : Node {
     public override void _Process(double delta) {
         // Switches states and emits beat toggle signal every fourth beat
         if (getCurrentBeat() % 4 == 3 && !_signalSent) {
-            GD.Print($"New State {_state}");
             _state = (_state + 1) % totalStates;
             EmitSignal(SignalName.BeatToggle, _state);
             _signalSent = true;
